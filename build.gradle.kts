@@ -21,6 +21,7 @@ dependencies {
     implementation(ktorLibs.server.contentNegotiation)
     implementation(ktorLibs.server.core)
     implementation(ktorLibs.server.netty)
+    implementation(libs.cio)
     implementation(libs.logback.classic)
     implementation(libs.auth)
 
