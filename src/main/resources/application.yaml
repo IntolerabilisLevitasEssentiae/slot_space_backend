@@ -1,7 +1,10 @@
 ktor:
   deployment:
     port: 8080
+    shutdown:
+      url: "/shutdown"
   application:
     modules:
       - com.slotspace.SerializationKt.configureSerialization
       - com.slotspace.RoutingKt.configureRouting
+      - com.slotspace.MainKt.mainModule

@@ -9,6 +9,7 @@ import io.ktor.server.auth.UserIdPrincipal
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.bearer
 import io.ktor.server.auth.principal
+import io.ktor.server.http.content.staticResources
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.reflect.TypeInfo
@@ -27,12 +28,15 @@ fun Application.configureRouting() {
     }
 
     routing {
-        get("/") {
-            call.respondText("Hello, World!")
-        }
-        get("/json/kotlinx-serialization") {
-            call.respond(mapOf("hello" to "world"))
-        }
+        // отдача файлов напрямую из resources/static
+        staticResources("/static", "static")
+
+//        get("/") { // todo: delete. Это базовый пример
+//            call.respondText("Hello, World!")
+//        }
+//        get("/json/kotlinx-serialization") {
+//            call.respond(mapOf("hello" to "world"))
+//        }
         post("/auth/anonymous") {
             call.respond(
                 HttpStatusCode.OK,
