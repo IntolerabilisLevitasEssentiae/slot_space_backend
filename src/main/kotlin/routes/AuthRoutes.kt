@@ -12,11 +12,9 @@ import io.ktor.server.routing.Route
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.post
 
-fun Routing.configureAuth() {
+fun Routing.configureAuth(client: HttpClient) {
     post("/auth/anonymous") {
-//        val client = HttpClient(CIO) // todo: отправка запросов
-//
-//        val text = client.get("https://google.com").body<String>()
+//        val text = client.get("https://google.com").body<String>()  // todo: отправка запросов
 //        println("$text")
         call.respond(
             HttpStatusCode.OK,
@@ -29,5 +27,7 @@ fun Routing.configureAuth() {
 }
 
 fun Route.bearerAuthenticate(build: Route.() -> Unit) {
-    authenticate("auth-bearer", build = build)
+    authenticate(ABEARERNAME, build = build)
 }
+
+const val ABEARERNAME = "auth-bearer"

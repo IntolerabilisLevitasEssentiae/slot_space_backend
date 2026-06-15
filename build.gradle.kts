@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.cio)
     implementation(libs.logback.classic)
     implementation(libs.auth)
+    implementation(libs.di)
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)

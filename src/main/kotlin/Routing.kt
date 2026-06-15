@@ -1,8 +1,10 @@
 package com.slotspace
 
 import com.slotspace.models.Token
+import com.slotspace.routes.ABEARERNAME
 import com.slotspace.routes.bearerAuthenticate
 import com.slotspace.routes.configureAuth
+import io.ktor.client.HttpClient
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
@@ -16,9 +18,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.reflect.TypeInfo
 
-fun Application.configureRouting() {
+fun Application.configureRouting(client: HttpClient) {
     install(Authentication) {
-        bearer("auth-bearer") {
+        bearer(ABEARERNAME) {
             authenticate { tokenCredential ->
                 if (tokenCredential.token.contains("1234")) {
                     UserIdPrincipal("Ok")
@@ -39,7 +41,7 @@ fun Application.configureRouting() {
 //        get("/json/kotlinx-serialization") {
 //            call.respond(mapOf("hello" to "world"))
 //        }
-        configureAuth()
+        configureAuth(client = client)
         bearerAuthenticate {
             get("/auth1") {
                 call.respondText("${call.principal<UserIdPrincipal>()?.name}")
