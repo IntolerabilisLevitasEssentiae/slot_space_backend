@@ -1,6 +1,8 @@
 package com.slotspace
 
 import com.slotspace.models.Token
+import com.slotspace.routes.bearerAuthenticate
+import com.slotspace.routes.configureAuth
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
@@ -37,16 +39,8 @@ fun Application.configureRouting() {
 //        get("/json/kotlinx-serialization") {
 //            call.respond(mapOf("hello" to "world"))
 //        }
-        post("/auth/anonymous") {
-            call.respond(
-                HttpStatusCode.OK,
-                message = Token(
-                    access = "access",
-                    refresh = "refresh"
-                ),
-            )
-        }
-        authenticate("auth-bearer") {
+        configureAuth()
+        bearerAuthenticate {
             get("/auth1") {
                 call.respondText("${call.principal<UserIdPrincipal>()?.name}")
             }
