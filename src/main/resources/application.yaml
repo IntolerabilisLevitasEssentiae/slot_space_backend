@@ -6,6 +6,6 @@ ktor:
   application:
     modules:
       - com.slotspace.SerializationKt.configureSerialization
-      - com.slotspace.di.NetworkKt.network
+      - com.slotspace.di.NetworkModuleKt.networkModule
       - com.slotspace.RoutingKt.configureRouting
-      - com.slotspace.MainKt.mainModule
+      - com.slotspace.MainKt.mainShutdown
