@@ -2,12 +2,25 @@
 kotlin = "2.3.21"
 logback = "1.5.34"
 ktor = "3.5.0"
+supabase = "3.6.0"
+
+kotlinxDateTime = "0.8.0-0.6.x-compat"
 
 [libraries]
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 auth = { group = "io.ktor", name = "ktor-server-auth", version.ref = "ktor" }
 cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 di = { group = "io.ktor", name = "ktor-server-di", version.ref = "ktor" }
+auth-jwt = { group = "io.ktor", name = "ktor-server-auth-jwt", version.ref = "ktor" }
+content-negotiation-client = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+
+# Supabase
+supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "supabase" }
+supabase-postgress = { module = "io.github.jan-tennert.supabase:postgrest-kt"  }
+
+# Kotlinx Datetime
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

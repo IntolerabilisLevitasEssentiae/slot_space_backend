@@ -24,7 +24,16 @@ dependencies {
     implementation(libs.cio)
     implementation(libs.logback.classic)
     implementation(libs.auth)
+    implementation(libs.auth.jwt)
     implementation(libs.di)
+    implementation(libs.content.negotiation.client)
+
+    // Supabase
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.supabase.postgress)
+
+    // Kotlinx Datetime
+    implementation(libs.kotlinx.datetime)
 
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)

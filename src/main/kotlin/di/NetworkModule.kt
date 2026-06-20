@@ -1,12 +1,26 @@
 package com.slotspace.di
 
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.server.application.Application
-import io.ktor.server.plugins.di.dependencies
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.di.*
 
 fun Application.networkModule() {
     dependencies {
-        provide<HttpClient> { HttpClient(CIO) }
+        provide<HttpClient> {
+            HttpClient(CIO) {
+                install(ContentNegotiation) {
+                    json(
+//                        Json {
+//                            serializersModule = SerializersModule {
+//                                polymorphic()
+//                            }
+//                        }
+                    )
+                }
+            }
+        }
     }
 }

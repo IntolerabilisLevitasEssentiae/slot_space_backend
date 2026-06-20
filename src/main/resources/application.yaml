@@ -7,5 +7,12 @@ ktor:
     modules:
       - com.slotspace.SerializationKt.configureSerialization
       - com.slotspace.di.NetworkModuleKt.networkModule
+      - com.slotspace.di.DataModuleKt.dataModule
       - com.slotspace.RoutingKt.configureRouting
       - com.slotspace.MainKt.mainShutdown
+
+jwt:
+  secret: "slit_space_backend"
+  refresh_secret: "refresh_slit_space_backend"
+  issuer: "slot_space"
+  audience: "api"
