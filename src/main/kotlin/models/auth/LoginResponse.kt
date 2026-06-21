@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoginResponse(
-    @SerialName(Const.Tables.ProfileTable.COLUMN.USER_ID)
+    @SerialName(Const.Tables.ProfileTable.Column.USER_ID)
     val id: Long
 )

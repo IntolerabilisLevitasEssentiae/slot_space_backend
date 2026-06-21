@@ -8,21 +8,21 @@ import kotlin.time.Instant
 
 @Serializable
 data class SavedProfileDto(
-    @SerialName(Const.Tables.ProfileTable.COLUMN.USER_ID)
+    @SerialName(Const.Tables.ProfileTable.Column.USER_ID)
     val userId: Long,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.NICKNAME)
+    @SerialName(Const.Tables.ProfileTable.Column.NICKNAME)
     val nickname: String,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.FIRST_NAME)
+    @SerialName(Const.Tables.ProfileTable.Column.FIRST_NAME)
     val firstName: String,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.MIDDLE_NAME)
+    @SerialName(Const.Tables.ProfileTable.Column.MIDDLE_NAME)
     val middleName: String,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.LAST_NAME)
+    @SerialName(Const.Tables.ProfileTable.Column.LAST_NAME)
     val lastName: String,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.GENDER)
+    @SerialName(Const.Tables.ProfileTable.Column.GENDER)
     val gender: Gender,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.AGE)
+    @SerialName(Const.Tables.ProfileTable.Column.AGE)
     val age: Int?,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.CREATED_AT)
+    @SerialName(Const.Tables.ProfileTable.Column.CREATED_AT)
     val createdAt: Instant,
 
 )

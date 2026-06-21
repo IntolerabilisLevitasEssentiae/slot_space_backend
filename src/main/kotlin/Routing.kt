@@ -68,7 +68,7 @@ fun Application.configureRouting(client: HttpClient, supabase: SupabaseClient) {
                         .from(Const.Tables.ProfileTable.NAME)
                         .select {
                             filter {
-                                eq(Const.Tables.ProfileTable.COLUMN.USER_ID, session.userId)
+                                eq(Const.Tables.ProfileTable.Column.USER_ID, session.userId)
                             }
                             limit(1)
                         }.decodeSingle<SavedProfileDto>()

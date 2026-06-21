@@ -7,8 +7,8 @@ import kotlin.time.Instant
 
 @Serializable
 data class CreateProfileDto(
-    @SerialName(Const.Tables.ProfileTable.COLUMN.USER_ID)
+    @SerialName(Const.Tables.ProfileTable.Column.USER_ID)
     val id: Long,
-    @SerialName(Const.Tables.ProfileTable.COLUMN.CREATED_AT)
+    @SerialName(Const.Tables.ProfileTable.Column.CREATED_AT)
     val createdAt: Instant
 )

@@ -29,7 +29,7 @@ object Const {
 
             const val NAME = "user"
 
-            object COLUMN {
+            object Column {
                 const val ID = "id"
                 const val LOGIN = "login"
                 const val PASSWORD = "password"
@@ -41,7 +41,7 @@ object Const {
 
             const val NAME = "profile"
 
-            object COLUMN {
+            object Column {
                 const val USER_ID = "user_id"
                 const val NICKNAME = "nickname"
                 const val FIRST_NAME = "first_name"
