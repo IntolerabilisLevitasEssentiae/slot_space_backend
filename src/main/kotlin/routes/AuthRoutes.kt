@@ -269,7 +269,6 @@ private fun Routing.handleLogin(supabase: SupabaseClient) {
                             }
                         }
                     )
-                // todo: удалить из токена роль? Удалить из токена userId?
                 call.respond(
                     status = HttpStatusCode.OK,
                     message = LoginResponse(id = savedUser.id)
