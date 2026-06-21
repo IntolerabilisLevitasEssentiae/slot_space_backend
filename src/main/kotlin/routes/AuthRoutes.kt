@@ -57,6 +57,8 @@ fun Routing.configureAuth(supabase: SupabaseClient) {
     handleLogin(supabase = supabase)
 
     handleLogout(supabase = supabase)
+
+    handleDeleteAccount(supabase = supabase)
 }
 
 fun Route.jwtAuthenticate(build: Route.() -> Unit) {
@@ -235,7 +237,7 @@ private fun Routing.handleLogin(supabase: SupabaseClient) {
                     .from(Const.Tables.UserTable.NAME)
                     .select {
                         filter {
-                            eq(Const.Tables.UserTable.COLUMN.LOGIN, credentials.login)
+                            eq(Const.Tables.UserTable.Column.LOGIN, credentials.login)
                         }
                         limit(1)
                     }
@@ -333,7 +335,7 @@ private fun Routing.handleRegistration(supabase: SupabaseClient) {
                     .from(Const.Tables.UserTable.NAME)
                     .select {
                         filter {
-                            eq(Const.Tables.UserTable.COLUMN.LOGIN, credentials.login)
+                            eq(Const.Tables.UserTable.Column.LOGIN, credentials.login)
                         }
                         limit(1)
                     }
@@ -477,6 +479,72 @@ private fun Routing.handleLogout(supabase: SupabaseClient) {
                 call.respond(
                     status = HttpStatusCode.InternalServerError,
                     message = e.message ?: "Can`t modify db, network issues"
+                )
+            } catch (e: SessionExpiredException) {
+                e.printStackTrace()
+                call.respond(
+                    status = HttpStatusCode.Unauthorized,
+                    message = e.message ?: "Session not exist! Check access token"
+                )
+            } catch (e: MissedAccessTokenException) {
+                e.printStackTrace()
+                call.respond(
+                    status = HttpStatusCode.Unauthorized,
+                    message = e.message ?: "Missed access token"
+                )
+            }
+        }
+    }
+}
+
+private fun Routing.handleDeleteAccount(supabase: SupabaseClient) {
+    jwtAuthenticate {
+        delete("/auth/accountDelete") {
+            try {
+                val accessToken = call.getAccessToken()
+                val session = supabase.getSession(accessToken = accessToken)
+
+                if (session.userId == null) {
+                    return@delete call.respond(
+                        status = HttpStatusCode.Forbidden,
+                        message = "Wrong access token"
+                    )
+                }
+
+                supabase
+                    .from(Const.Tables.UserTable.NAME)
+                    .delete {
+                        filter {
+                            eq(Const.Tables.UserTable.Column.ID, session.userId)
+                        }
+                    }
+
+                call.respond(
+                    status = HttpStatusCode.OK,
+                    message = "Success delete"
+                )
+            } catch (e: ContentTransformationException) {
+                call.respond(
+                    status = HttpStatusCode.UnprocessableEntity,
+                    message = e.message ?: "Something wen`t wrong on body parse"
+                )
+            } catch (e: PostgrestRestException) {
+                e.printStackTrace()
+                call.respond(
+                    status = HttpStatusCode.InternalServerError,
+                    message = e.message ?: "Can`t delete account to db, request fails"
+                )
+            } catch (e: HttpRequestTimeoutException) {
+                e.printStackTrace()
+                call.respond(
+                    status = HttpStatusCode.InternalServerError,
+                    message = e.message ?: "Can`t delete account to db, http timeout"
+                )
+            } catch (e: HttpRequestException) {
+                e.printStackTrace()
+                call.respond(
+                    status = HttpStatusCode.InternalServerError,
+                    message = e.message ?: "Can`t delete account to db, network issues"
                 )
             } catch (e: SessionExpiredException) {
                 e.printStackTrace()
