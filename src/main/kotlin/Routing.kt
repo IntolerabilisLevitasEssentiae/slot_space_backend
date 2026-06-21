@@ -26,7 +26,6 @@ import io.ktor.server.http.content.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-// todo: был плагин для регистрации cron-job-ы. Надо чистить сессии, сделать крч
 fun Application.configureRouting(client: HttpClient, supabase: SupabaseClient) {
     val jwtSecret = environment.jwtSecret
 
