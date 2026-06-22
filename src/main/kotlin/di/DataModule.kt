@@ -1,5 +1,7 @@
 package com.slotspace.di
 
+import com.slotspace.extensions.supabaseKey
+import com.slotspace.extensions.supabaseUrl
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.logging.LogLevel
@@ -11,8 +13,8 @@ fun Application.dataModule() {
     dependencies {
         provide<SupabaseClient> {
             createSupabaseClient(
-                supabaseUrl = "https://wglgfynfptjskhgwawbw.supabase.co",
-                supabaseKey = "sb_secret_-63KQfRCx0LilhLwteYY_Q_EjB4pFon"
+                supabaseUrl = this@dataModule.environment.supabaseUrl,
+                supabaseKey = this@dataModule.environment.supabaseKey,
             ) {
                 install(Postgrest)
                 defaultLogLevel = LogLevel.DEBUG

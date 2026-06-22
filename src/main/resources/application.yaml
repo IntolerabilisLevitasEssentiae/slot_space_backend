@@ -12,7 +12,11 @@ ktor:
       - com.slotspace.MainKt.mainShutdown
 
 jwt:
-  secret: "slit_space_backend"
-  refresh_secret: "refresh_slit_space_backend"
+  secret: $JWT_SECRET
+  refresh_secret: $REFRESH_SECRET
   issuer: "slot_space"
   audience: "api"
+
+supabase:
+  url: $SUPABASE_URL
+  key: $SUPABASE_KEY
