@@ -7,8 +7,6 @@ object Const {
     const val ACCESS_TOKEN_EXPIRES_AT_MILLIS = 300_000L // 5 минут
     const val REFRESH_TOKEN_EXPIRES_AT_MILLIS = 604800000L // 604800000L = 7 дней
 
-    const val SUPABASE_EDGE_F_BASE_URL = "https://wglgfynfptjskhgwawbw.supabase.co/functions/v1"
-
     object Tables {
 
         object SessionTable {
