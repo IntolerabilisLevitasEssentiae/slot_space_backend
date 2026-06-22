@@ -1,8 +1,9 @@
 FROM gradle:latest AS cache
 RUN mkdir -p /home/gradle/cache_home
 ENV GRADLE_USER_HOME=/home/gradle/cache_home
-COPY build.gradle.* gradle.properties /home/gradle/app/
+COPY settings.gradle.kts build.gradle.kts gradle.properties /home/gradle/app/
 COPY gradle /home/gradle/app/gradle
+COPY gradle/libs.versions.toml /home/gradle/app/gradle/libs.versions.toml
 WORKDIR /home/gradle/app
 RUN gradle dependencies --no-daemon
   
@@ -20,4 +21,4 @@ FROM amazoncorretto:22 AS runtime
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/backend.jar
-ENTRYPOINT ["java","-jar","/app/backend.jar"]
+ENTRYPOINT ["java","-jar","/app/backend.jar", "-config=application.yaml"]
